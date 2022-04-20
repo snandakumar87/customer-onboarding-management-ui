@@ -23,8 +23,7 @@ import java.util.Map;
 @ApplicationScoped
 public class OnboardingResource {
 
-    @Inject
-    KafkaController kafkaController;
+
 
     @Inject
     KafkaDocsController kafkaDocsController;
@@ -34,22 +33,6 @@ public class OnboardingResource {
     Publisher<String> transactionPublisher;
 
 
-    @POST
-    @Path("/request/{reqId}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public void postCase(String json,@javax.ws.rs.PathParam("reqId") String reqId) {
-
-        try {
-
-
-            kafkaController.produce(reqId,json);
-
-
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @GET
     @Path("/stream")
