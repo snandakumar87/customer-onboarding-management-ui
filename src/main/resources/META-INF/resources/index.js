@@ -9,7 +9,7 @@ if (!!window.EventSource) {
         alert(JSON.stringify(data));
 
         var row = '<tr><td>' + data.requestId+ '</td><td>' + data.dueDiligence + '</td><td>' + data.Documents + '</td><td>' +
-        + JSON.stringify(data,null,10) + '</td>';
+        + JSON.stringify(data) + '</td><td>' ;
 
 
 
