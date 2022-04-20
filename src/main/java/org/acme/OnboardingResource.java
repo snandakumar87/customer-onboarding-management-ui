@@ -25,8 +25,6 @@ public class OnboardingResource {
 
 
 
-    @Inject
-    KafkaDocsController kafkaDocsController;
 
     @Inject
     @Channel("txn-kafka")
@@ -45,60 +43,6 @@ public class OnboardingResource {
         return transactionPublisher;
     }
 
-
-    @POST
-    @Path("/documents")
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Produces(MediaType.APPLICATION_OCTET_STREAM)
-    public void postCaseDocs(MultipartFormDataInput dataInput, @javax.ws.rs.QueryParam("requestId") String requestId) throws Exception {
-        Map<String, List<InputPart>> uploadForm = dataInput.getFormDataMap();
-
-        List<String> docIds = new ArrayList<>();
-
-
-
-        List<InputPart> docs = uploadForm.get("uploadedFile");
-
-        System.out.println(docs.size());
-
-        for (InputPart inputPart : docs) {
-            int i = 0;
-
-            InputStream inputStream = inputPart.getBody(InputStream.class, null);
-
-            String fileName = getFileName(inputPart.getHeaders());
-
-
-
-            byte[] bytes = IOUtils.toByteArray(inputStream);
-            String base64 = StringUtils.newStringUtf8(Base64.encodeBase64(bytes, true));
-
-            String responseString = base64;
-            System.out.println(responseString);
-            kafkaDocsController.produce(requestId,responseString);
-
-        }
-
-
-
-    }
-    private String getFileName(MultivaluedMap<String, String> header) {
-
-
-        String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
-
-        for (String filename : contentDisposition) {
-
-            if ((filename.trim().startsWith("filename"))) {
-
-                String[] name = filename.split("=");
-
-                String finalFileName = name[1].trim().replaceAll("\"", "");
-                return finalFileName;
-            }
-        }
-        return "unknown";
-    }
 
 
 }

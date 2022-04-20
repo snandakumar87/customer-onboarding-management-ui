@@ -6,10 +6,8 @@ if (!!window.EventSource) {
 
         data = JSON.parse(event.data);
 
-        var row = '<tr><td>' + data.requestId+ '</td><td>' + data.Documents + '</td><td>' ;
-
-
- row+='<td><button type="button" id="ajaxSubmit" onclick="checkout('+data.requestId+')">Details</button></td>';
+        var row = '<tr><td>' + data.requestId+ '</td><td>' + data.dueDiligence + '</td><td>' + data.Documents + '</td><td>' +
+        + JSON.stringify(data) + '</td>';
 
 
 
@@ -24,10 +22,3 @@ if (!!window.EventSource) {
     window.alert("EventSource not available on this browser.")
 }
 
-function checkout(requestId) {
-
-
-window.open("/UploadDocumentation.html?requestId="+requestId, '_blank');
-
-
-}
