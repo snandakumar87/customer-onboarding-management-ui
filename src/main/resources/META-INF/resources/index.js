@@ -6,8 +6,10 @@ if (!!window.EventSource) {
 
         data = JSON.parse(event.data);
 
+        var jsonData = JSON.parse(data);
+
         var row = '<tr><td>' + data.requestId+ '</td><td>' + data.dueDiligence + '</td><td>' + data.Documents + '</td><td>' +
-        + JSON.stringify(data) + '</td>';
+        + JSON.stringify(jsonData) + '</td>';
 
 
 
