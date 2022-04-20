@@ -8,7 +8,7 @@ if (!!window.EventSource) {
 
 
 
-        var row = '<tr><td>' + data.requestId+ '</td><td>' + data.dueDiligence + '</td><td>' + data.Documents + '</td><td>' +data.registrantsignature + '</td>';
+        var row = '<tr><td>' + data.requestId+ '</td><td>' + data.dueDiligence + '</td><td>' + data.Documents + '</td>';
 
 
 
